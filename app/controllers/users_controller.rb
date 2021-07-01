@@ -24,10 +24,10 @@ class UsersController < ApplicationController
         @user = User.find params[:id]
         @user.update(user_params)
         # @user = User.update(name: params[:name], photo: params[:photo])
-        if @user.update(user_params)
+        if @user.update(user_params), status: :updated
             render json: @user
         else
-            render json: {errors: @user.errros.full_messages}, status: :updated
+            render json: {errors: @user.errros.full_messages}, status: :bad_request
         end
     end
 

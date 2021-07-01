@@ -24,10 +24,10 @@ class ArtworksController < ApplicationController
         @artwork = Artwork.find params[:id]
         @artwork.update(artwork_params)
         # @artwork = Artwork.update(title: params[:title], image: params[:image])
-        if @artwork.update(artwork_params)
+        if @artwork.update(artwork_params), status: :updated
             render json: @artwork
         else
-            render json: {errors: @artwork.errros.full_messages}, status: :updated
+            render json: {errors: @artwork.errros.full_messages}, status: :bad_request
         end
     end
 
