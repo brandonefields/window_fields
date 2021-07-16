@@ -21,14 +21,8 @@ class ArtworksController < ApplicationController
     end
     
     def update 
-        @artwork = Artwork.find params[:id]
-        @artwork.update(artwork_params)
-        # @artwork = Artwork.update(title: params[:title], image: params[:image])
-        if @artwork.update(artwork_params), status: :updated
-            render json: @artwork
-        else
-            render json: {errors: @artwork.errros.full_messages}, status: :bad_request
-        end
+       @artwork = Artwork.find params[:id]
+       @artwork.update title: params[:title], image: params[:image]
     end
 
     def destroy
@@ -40,7 +34,8 @@ class ArtworksController < ApplicationController
     private
 
     def artwork_params
-        params.require(:artwork).permit(:title,:image)
+        params.require(:artwork).permit(:title, :image )
+        # params.require(:artwork).permit(:title, :image: [], :upload_image  )
     end
     
 
