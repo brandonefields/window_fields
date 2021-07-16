@@ -23,12 +23,13 @@ class ArtworksController < ApplicationController
     def update 
        @artwork = Artwork.find params[:id]
        @artwork.update title: params[:title], image: params[:image]
+       render json: @artwork, status: :created
     end
 
     def destroy
         @artwork = Artwork.find params[:id]
         @artwork.destroy
-        render json: {message: "successfully deleted user"} 
+        render json: {message: "successfully deleted artwork #{ @artwork}"} 
     end 
 
     private
